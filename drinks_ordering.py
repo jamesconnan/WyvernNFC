@@ -4,6 +4,9 @@ import json
 from decimal import Decimal
 from datetime import datetime
 import os
+import socket
+import threading
+import time
 
 class DrinksOrderingSystem:
     def __init__(self, root):
@@ -22,6 +25,11 @@ class DrinksOrderingSystem:
         # Initialize order
         self.current_order = []
         self.total_amount = Decimal('0.00')
+        
+        # Network status
+        self.network_status = tk.StringVar()
+        self.network_status.set("Checking network...")
+        self.is_online = False
         
         # Configure style
         self.style = ttk.Style()
@@ -53,8 +61,45 @@ class DrinksOrderingSystem:
         # Status bar
         self.status_var = tk.StringVar()
         self.status_var.set("Ready to take orders")
-        status_bar = ttk.Label(root, textvariable=self.status_var, relief=tk.SUNKEN, anchor=tk.W, font=('Arial', 16))
+        status_bar = ttk.Frame(root)
         status_bar.pack(side=tk.BOTTOM, fill=tk.X)
+        
+        # Status message
+        status_label = ttk.Label(status_bar, textvariable=self.status_var, relief=tk.SUNKEN, anchor=tk.W, font=('Arial', 16))
+        status_label.pack(side=tk.LEFT, fill=tk.X, expand=True)
+        
+        # Network status indicator
+        self.network_label = ttk.Label(status_bar, textvariable=self.network_status, relief=tk.SUNKEN, anchor=tk.E, font=('Arial', 16))
+        self.network_label.pack(side=tk.RIGHT, fill=tk.X, padx=(10, 0))
+        
+        # Start network monitoring
+        self.start_network_monitoring()
+    
+    def check_network_connection(self):
+        try:
+            # Try to connect to a reliable server (Google's DNS)
+            socket.create_connection(("8.8.8.8", 53), timeout=2)
+            return True
+        except OSError:
+            return False
+    
+    def update_network_status(self):
+        while True:
+            is_connected = self.check_network_connection()
+            if is_connected != self.is_online:
+                self.is_online = is_connected
+                if is_connected:
+                    self.network_status.set("Online")
+                    self.network_label.configure(foreground="green")
+                else:
+                    self.network_status.set("Offline")
+                    self.network_label.configure(foreground="red")
+            time.sleep(5)  # Check every 5 seconds
+    
+    def start_network_monitoring(self):
+        # Start network monitoring in a separate thread
+        network_thread = threading.Thread(target=self.update_network_status, daemon=True)
+        network_thread.start()
     
     def create_content_area(self):
         # Create main content frame
