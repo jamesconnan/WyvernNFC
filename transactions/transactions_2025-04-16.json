@@ -1,0 +1,49 @@
+[
+  {
+    "timestamp": "2025-04-16 15:19:12",
+    "payment_method": "card",
+    "total_amount": 50.0,
+    "amount_received": null,
+    "items": [
+      "Castle Light - R25",
+      "Castle Light - R25"
+    ]
+  },
+  {
+    "timestamp": "2025-04-16 15:23:52",
+    "payment_method": "cash",
+    "total_amount": 60.0,
+    "amount_received": 100.0,
+    "items": [
+      "Hansa - R30",
+      "Hansa - R30"
+    ]
+  },
+  {
+    "timestamp": "2025-04-16 15:24:18",
+    "payment_method": "card",
+    "total_amount": 40.0,
+    "amount_received": null,
+    "items": [
+      "Glass - R40"
+    ]
+  },
+  {
+    "timestamp": "2025-04-16 15:27:18",
+    "payment_method": "cash",
+    "total_amount": 120.0,
+    "amount_received": 200.0,
+    "items": [
+      "Bottle - R120"
+    ]
+  },
+  {
+    "timestamp": "2025-04-16 15:27:35",
+    "payment_method": "card",
+    "total_amount": 40.0,
+    "amount_received": null,
+    "items": [
+      "Single - R40"
+    ]
+  }
+]

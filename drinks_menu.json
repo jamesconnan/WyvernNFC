@@ -1,0 +1,152 @@
+{
+  "Beer": {
+    "Castle Light": {
+      "price": 25
+    },
+    "Black Lable": {
+      "price": 30
+    },
+    "Windhoek Lager": {
+      "price": 35
+    },
+    "Windhoek Draught": {
+      "price": 35
+    },
+    "Hansa": {
+      "price": 30
+    }
+  },
+  "Wine": {
+    "Cabernet Sauvignon": {
+      "Glass": {
+        "price": 40
+      },
+      "Bottle": {
+        "price": 120
+      }
+    },
+    "Merlot": {
+      "Glass": {
+        "price": 40
+      },
+      "Bottle": {
+        "price": 120
+      }
+    },
+    "Chardonnay": {
+      "Glass": {
+        "price": 40
+      },
+      "Bottle": {
+        "price": 120
+      }
+    },
+    "Sauvignon Blanc": {
+      "Glass": {
+        "price": 40
+      },
+      "Bottle": {
+        "price": 120
+      }
+    },
+    "Dry Ros\u00e9": {
+      "Glass": {
+        "price": 40
+      },
+      "Bottle": {
+        "price": 120
+      }
+    }
+  },
+  "Gin": {
+    "Strettons": {
+      "Single": {
+        "price": 40
+      },
+      "Double": {
+        "price": 60
+      }
+    },
+    "Tanqueray": {
+      "Single": {
+        "price": 50
+      },
+      "Double": {
+        "price": 80
+      }
+    }
+  },
+  "Brandy": {
+    "Klipdrift": {
+      "Single": {
+        "price": 40
+      },
+      "Double": {
+        "price": 60
+      }
+    },
+    "Richelieu": {
+      "Single": {
+        "price": 40
+      },
+      "Double": {
+        "price": 60
+      }
+    },
+    "KWV 10": {
+      "Single": {
+        "price": 50
+      },
+      "Double": {
+        "price": 80
+      }
+    }
+  },
+  "Vodka": {
+    "Russian Bear": {
+      "Single": {
+        "price": 40
+      },
+      "Double": {
+        "price": 60
+      }
+    },
+    "Smirnoff": {
+      "Single": {
+        "price": 40
+      },
+      "Double": {
+        "price": 60
+      }
+    }
+  },
+  "Whiskey": {
+    "Bells": {
+      "Single": {
+        "price": 40
+      },
+      "Double": {
+        "price": 60
+      }
+    },
+    "Jamesons": {
+      "Single": {
+        "price": 50
+      },
+      "Double": {
+        "price": 80
+      }
+    }
+  },
+  "Soft Drinks": {
+    "Coca-Cola": {
+      "price": 10
+    },
+    "Still Water": {
+      "price": 10
+    },
+    "Sparkling Water": {
+      "price": 10
+    }
+  }
+}
