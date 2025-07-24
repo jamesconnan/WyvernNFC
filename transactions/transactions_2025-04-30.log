@@ -1,0 +1,45 @@
+Timestamp: 2025-04-30 23:49:17
+Payment Method: wyvern_card_06801160
+Total Amount: R90.00
+Discount Amount: R45.00
+Amount After Discount: R45.00
+
+Items:
+- Beer > Corona - R30
+- Beer > Corona - R30
+- Beer > Corona - R30
+================================================================================
+Timestamp: 2025-04-30 23:49:35
+Payment Method: cash
+Total Amount: R240.00
+
+Items:
+- Wine > Merlot > Bottle - R120
+- Wine > Merlot > Bottle - R120
+================================================================================
+Timestamp: 2025-04-30 23:49:45
+Payment Method: card
+Total Amount: R320.00
+
+Items:
+- Whiskey > Jamesons > Double - R80
+- Whiskey > Jamesons > Double - R80
+- Whiskey > Jamesons > Double - R80
+- Whiskey > Jamesons > Double - R80
+================================================================================
+Timestamp: 2025-04-30 23:50:45
+Payment Method: wyvern_card_14301160
+Total Amount: R80.00
+Discount Amount: R20.00
+Amount After Discount: R60.00
+
+Items:
+- Soft Drinks > Sparkling Water - R10
+- Soft Drinks > Sparkling Water - R10
+- Soft Drinks > Still Water - R10
+- Soft Drinks > Still Water - R10
+- Soft Drinks > Coca-Cola - R10
+- Soft Drinks > Coca-Cola - R10
+- Soft Drinks > Coca-Cola - R10
+- Soft Drinks > Coca-Cola - R10
+================================================================================

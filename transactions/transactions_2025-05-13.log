@@ -1,0 +1,37 @@
+Timestamp: 2025-05-13 18:08:35
+Payment Method: wyvern_card_06801160
+Total Amount: R240.00
+Discount Amount: R120.00
+Amount After Discount: R120.00
+
+Items:
+- RED WINE > MCGREGOR SHIRAZ (BOTTLE) - R120
+- RED WINE > MCGREGOR SHIRAZ (BOTTLE) - R120
+================================================================================
+Timestamp: 2025-05-13 18:11:10
+Payment Method: card
+Total Amount: R25.00
+
+Items:
+- BEER > BLACK LABEL (340ML) - R25
+================================================================================
+Timestamp: 2025-05-13 21:47:10
+Payment Method: cash
+Total Amount: R110.00
+
+Items:
+- BEER > BLACK LABEL > BEER > BLACK LABEL > 340ML - R25
+- BEER > CASTLE LAGER > BEER > CASTLE LAGER > 340ML - R25
+- BEER > CASTLE LITE > BEER > CASTLE LITE > QUART - R40
+- BEER > CASTLE LITE > BEER > CASTLE LITE > 340ML - R20
+================================================================================
+Timestamp: 2025-05-13 22:16:45
+Payment Method: cash
+Total Amount: R215.00
+
+Items:
+- BRANDY > KLIPDRIFT > BRANDY > KLIPDRIFT > SINGLE - R30
+- BRANDY > KWV 10YO > BRANDY > KWV 10YO > DOUBLE - R50
+- WHITE SPIRITS > GORDONS GIN > WHITE SPIRITS > GORDONS GIN > SINGLE - R20
+- KITCHEN > PIZZA > KITCHEN > PIZZA > CHICKEN - R115
+================================================================================

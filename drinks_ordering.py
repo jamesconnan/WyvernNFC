@@ -27,6 +27,7 @@ class DrinksOrderingSystem:
         self.root = root
         self.root.title("Drinks Ordering System")
         self.root.geometry("1200x800")
+        #self.root.geometry("1920x1080")
         self.root.configure(bg="#f0f0f0")
         
         # Make window fullscreen
@@ -374,11 +375,11 @@ BEER:,TAFEL LAGER,340ML BOTTLE,25"""
         if isinstance(items, dict):
             for name, subitems in items.items():
                 if isinstance(subitems, dict):
-                    if "price" in subitems or "single_price" in subitems:
-                        # It's a drink item
+                    if "price" in subitems:
+                        # It's a size/price item
                         self.create_drink_button(self.scrollable_frame, name, subitems)
                     else:
-                        # It's a category
+                        # It's a category or description
                         btn = ttk.Button(
                             self.scrollable_frame,
                             text=name,
@@ -405,13 +406,12 @@ BEER:,TAFEL LAGER,340ML BOTTLE,25"""
                 # Go back to root level
                 self.show_level(self.menu_data)
     
-    def create_drink_button(self, parent, name, details):
-        if "price" in details:
-            price = details["price"]
-        elif "single_price" in details:
-            price = details["single_price"]
-        else:
+    def create_drink_button(self, parent, size, details):
+        """Create a button for a drink with size and price."""
+        if "price" not in details:
             return
+        
+        price = details["price"]
         
         button_frame = ttk.Frame(parent)
         button_frame.pack(fill=tk.X, pady=5, padx=5)
@@ -424,93 +424,18 @@ BEER:,TAFEL LAGER,340ML BOTTLE,25"""
         content_frame = ttk.Frame(button_frame)
         content_frame.pack(fill=tk.X, expand=True)
         
-        # Try to load the product image
-        try:
-            # Extract product name from the full name (remove size info)
-            product_name = name.split(" (")[0].strip()
-            
-            # Try different variations of the image name
-            possible_names = [
-                product_name.lower().replace(" ", "_") + ".jpeg",
-                product_name.lower().replace(" ", "_") + ".jpg",
-                product_name.lower().replace(" ", "") + ".jpeg",
-                product_name.lower().replace(" ", "") + ".jpg",
-                product_name.lower() + ".jpeg",  # Try exact name
-                product_name.lower() + ".jpg"    # Try exact name with jpg
-            ]
-            
-            # Add special cases (all lowercase)
-            if "black label" in product_name.lower():
-                possible_names.append("black label.jpeg")
-            elif "castle lager" in product_name.lower():
-                possible_names.append("castle lager.jpeg")
-            elif "castle lite" in product_name.lower():
-                possible_names.append("castle lite pic.jpeg")
-            elif "heineken" in product_name.lower():
-                possible_names.append("heineken lager.jpeg")
-            elif "stella" in product_name.lower():
-                possible_names.append("stella.jpeg")
-            elif "tafel" in product_name.lower():
-                possible_names.append("tafel.jpeg")
-            
-            # Try to find a matching image
-            image_found = False
-            for image_name in possible_names:
-                image_path = os.path.join("images", image_name)
-                # Check if file exists (case-insensitive)
-                if any(os.path.exists(os.path.join("images", f)) and f.lower() == image_name.lower() 
-                      for f in os.listdir("images")):
-                    try:
-                        # Get the actual filename with correct case
-                        actual_filename = next(f for f in os.listdir("images") 
-                                            if f.lower() == image_name.lower())
-                        image_path = os.path.join("images", actual_filename)
-                        
-                        # Open and resize the image using PIL
-                        pil_image = Image.open(image_path)
-                        # Calculate new size (e.g., 50x50 pixels)
-                        target_size = (50, 50)
-                        pil_image = pil_image.resize(target_size, Image.Resampling.LANCZOS)
-                        # Convert PIL image to PhotoImage
-                        product_image = ImageTk.PhotoImage(pil_image)
-                        image_found = True
-                        break
-                    except Exception as e:
-                        print(f"Error loading image {image_path}: {str(e)}")
-                        continue
-            
-            if not image_found:
-                # Use notfound.jpeg if no product image found
-                try:
-                    # Find notfound.jpeg case-insensitively
-                    notfound_files = [f for f in os.listdir("images") 
-                                    if f.lower() == "notfound.jpeg"]
-                    if notfound_files:
-                        notfound_path = os.path.join("images", notfound_files[0])
-                        pil_image = Image.open(notfound_path)
-                        target_size = (50, 50)
-                        pil_image = pil_image.resize(target_size, Image.Resampling.LANCZOS)
-                        product_image = ImageTk.PhotoImage(pil_image)
-                    else:
-                        print("notfound.jpeg not found in images directory")
-                        return
-                except Exception as e:
-                    print(f"Error loading notfound.jpeg: {str(e)}")
-                    return
-            
-            # Create image label
-            image_label = ttk.Label(content_frame, image=product_image)
-            image_label.image = product_image  # Keep a reference
-            image_label.pack(side=tk.LEFT, padx=5)
-            
-        except Exception as e:
-            print(f"Error loading image for {name}: {str(e)}")
+        # Get the full path for this item
+        path = []
+        for level_name, _ in self.navigation_history:
+            path.append(level_name)
+        path.append(size)
+        full_name = " > ".join(path)
         
         # Create button with text
         button = ttk.Button(
             content_frame,
-            text=f"{name} - R{price}",
-            command=lambda: self.add_to_order(name, details),
+            text=f"{size} - R{price}",
+            command=lambda: self.add_to_order(full_name, details),
             width=button_width
         )
         button.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=5)
@@ -868,7 +793,7 @@ BEER:,TAFEL LAGER,340ML BOTTLE,25"""
         
         # Reset status
         self.status_var.set("Ready for next order")
-        
+    
         # Reset navigation history
         self.navigation_history = []
         
@@ -1072,7 +997,7 @@ BEER:,TAFEL LAGER,340ML BOTTLE,25"""
                     parts = line.strip().split(',')
                     if len(parts) >= 4:
                         category = parts[0].replace(':', '')  # Remove colon from category
-                        name = parts[1]
+                        description = parts[1]
                         size = parts[2]
                         price = parts[3]
                         
@@ -1080,12 +1005,15 @@ BEER:,TAFEL LAGER,340ML BOTTLE,25"""
                         if category not in self.menu_data:
                             self.menu_data[category] = {}
                         
-                        # Add item to category
-                        item_name = f"{name} ({size})"
-                        self.menu_data[category][item_name] = {"price": price}
+                        # Create description if it doesn't exist
+                        if description not in self.menu_data[category]:
+                            self.menu_data[category][description] = {}
+                        
+                        # Add size and price
+                        self.menu_data[category][description][size] = {"price": price}
             
             print(f"Menu loaded successfully (categories: {len(self.menu_data)})")
-            
+                
             # If we're in the main content area, refresh the view
             if hasattr(self, 'scrollable_frame'):
                 print("Refreshing menu view...")
